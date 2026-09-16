@@ -7,7 +7,7 @@ import { schoolInfo } from "@/lib/data/school-info";
 import {
   ChalkboardTeacher, UsersThree, CalendarCheck, BookOpen,
   PresentationChart, CheckCircle, SignOut, Bell, X, Check,
-  UploadSimple, StudentFill
+  UploadSimple, Student
 } from "@phosphor-icons/react/dist/ssr";
 
 const initialRoster = [
@@ -114,7 +114,7 @@ export default function TeacherDashboard() {
         {/* Quick Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <div className="bg-white rounded-2xl p-4 shadow-sm border border-indigo-100 border-t-4 border-t-indigo-500 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center"><StudentFill size={20} /></div>
+            <div className="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center"><Student weight="fill" size={20} /></div>
             <div><p className="text-xs font-bold text-slate-500 uppercase">My Students</p><p className="text-xl font-bold text-slate-900">{roster.length}</p></div>
           </div>
           <div className="bg-white rounded-2xl p-4 shadow-sm border border-emerald-100 border-t-4 border-t-emerald-500 flex items-center gap-3">

@@ -85,7 +85,7 @@ export default function Home() {
             </motion.div>
 
             {/* EMBLEM SHOWCASE CARD - Spans 4 columns */}
-            <motion.div variants={itemVariants} className="md:col-span-4 rounded-3xl relative overflow-hidden min-h-[320px] md:min-h-[380px] flex flex-col justify-between bg-slate-950 group border border-slate-800/80 shadow-2xl mt-6 md:mt-0 p-6">
+            <motion.div variants={itemVariants} className="md:col-span-4 rounded-3xl relative overflow-hidden min-h-[320px] md:min-h-[380px] flex flex-col justify-between bg-slate-950 group border border-slate-800 shadow-2xl shadow-slate-950/50 mt-6 md:mt-0 p-6 [transform:translateZ(0)]">
               {/* Moving Grid Background */}
               <motion.div 
                 animate={{ backgroundPosition: ['0px 0px', '24px 24px'] }}
@@ -93,8 +93,8 @@ export default function Home() {
                 className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"
               />
 
-              {/* Video Framing - object-cover centers the emblem and reflection, cropping excess 16:9 sides */}
-              <div className="absolute inset-0 overflow-hidden">
+              {/* Video Framing - perfectly clipped to rounded corners with object-cover */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl [transform:translateZ(0)]">
                 <video
                   ref={videoRef}
                   src="/assets/logo-animation.mp4"
@@ -103,28 +103,31 @@ export default function Home() {
                   playsInline
                   onTimeUpdate={handleTimeUpdate}
                   onEnded={handleEnded}
-                  className="w-full h-full object-cover scale-[0.97] pointer-events-none"
+                  className="w-full h-full object-cover scale-[0.98] pointer-events-none"
                 />
               </div>
 
-              {/* Top Bar: Official Badge & Board Affiliation (No duplicate ESTD) */}
+              {/* Ultra-crisp Inner Glass Highlight Ring */}
+              <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/15 pointer-events-none z-20" />
+
+              {/* Top Bar: Official Badge & Board Affiliation */}
               <div className="relative z-20 flex justify-between items-start">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-[10px] font-semibold text-slate-200 uppercase tracking-widest shadow-lg">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/15 text-[10px] font-semibold text-slate-200 uppercase tracking-widest shadow-lg">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   Official Crest
                 </div>
-                <div className="px-2.5 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/10 text-[10px] font-medium text-slate-300">
+                <div className="px-2.5 py-1 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/10 text-[10px] font-medium text-slate-300">
                   WBBSE • WBCHSE
                 </div>
               </div>
 
-              {/* Bottom Cinematic Gradient Vignette (Masks the extreme bottom-left corner watermark) */}
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent z-10 pointer-events-none" />
+              {/* Bottom Cinematic Gradient Vignette (Masks watermark and elevates legibility) */}
+              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-950 via-slate-950/75 to-transparent z-10 pointer-events-none" />
 
               {/* Single Clean Establishment & Location Info */}
               <div className="relative z-20">
-                <p className="text-white font-heading text-xl font-bold tracking-tight">Est. {schoolInfo.established}</p>
-                <p className="text-slate-300 text-xs font-medium mt-0.5">{schoolInfo.managementType} • Kolkata</p>
+                <p className="text-white font-heading text-xl font-bold tracking-tight drop-shadow-md">Est. {schoolInfo.established}</p>
+                <p className="text-slate-300 text-xs font-medium mt-0.5 drop-shadow-sm">{schoolInfo.managementType} • Kolkata</p>
               </div>
             </motion.div>
 

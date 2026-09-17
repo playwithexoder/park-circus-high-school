@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { schoolInfo } from "@/lib/data/school-info";
@@ -11,7 +11,15 @@ import Link from "next/link";
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const LOOP_START_TIME = 7.0;
+  // Extremely last settled segment of the 8-second video
+  const LOOP_START_TIME = 7.4;
+
+  useEffect(() => {
+    if (videoRef.current) {
+      // Slow down playback for a smooth, cinematic, and majestic feel
+      videoRef.current.playbackRate = 0.65;
+    }
+  }, []);
 
   const handleTimeUpdate = () => {
     if (videoRef.current && videoRef.current.currentTime >= 7.95) {

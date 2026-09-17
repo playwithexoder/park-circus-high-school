@@ -14,7 +14,7 @@ export default function Home() {
   const LOOP_START_TIME = 7.0;
 
   const handleTimeUpdate = () => {
-    if (videoRef.current && videoRef.current.currentTime >= 7.9) {
+    if (videoRef.current && videoRef.current.currentTime >= 7.95) {
       videoRef.current.currentTime = LOOP_START_TIME;
       videoRef.current.play();
     }

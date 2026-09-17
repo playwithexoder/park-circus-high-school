@@ -84,10 +84,20 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* FULL BLEED EMBLEM SHOWCASE CARD - Spans 4 columns */}
+            {/* EMBLEM SHOWCASE CARD - Spans 4 columns */}
             <motion.div variants={itemVariants} className="md:col-span-4 rounded-3xl relative overflow-hidden min-h-[320px] md:min-h-[380px] flex flex-col justify-between bg-slate-950 group border border-slate-800/80 shadow-2xl mt-6 md:mt-0 p-6">
-              {/* Video Filling Entire Card Background with scale to eliminate corner watermark */}
-              <div className="absolute inset-0 overflow-hidden">
+              {/* Moving Grid Background */}
+              <motion.div 
+                animate={{ backgroundPosition: ['0px 0px', '24px 24px'] }}
+                transition={{ duration: 1.5, ease: "linear", repeat: Infinity }}
+                className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"
+              />
+
+              {/* Video Framing - object-contain ensures full circular emblem with all text is unclipped */}
+              <div className="absolute inset-0 flex items-center justify-center p-3 overflow-hidden">
+                {/* Soft ambient backlight behind emblem */}
+                <div className="absolute w-52 h-52 bg-gradient-to-tr from-blue-600/25 to-amber-500/20 rounded-full blur-2xl pointer-events-none opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
+                
                 <video
                   ref={videoRef}
                   src="/assets/logo-animation.mp4"
@@ -96,28 +106,25 @@ export default function Home() {
                   playsInline
                   onTimeUpdate={handleTimeUpdate}
                   onEnded={handleEnded}
-                  className="w-full h-full object-cover scale-[1.14] pointer-events-none transition-transform duration-700 group-hover:scale-[1.18]"
+                  className="w-full h-full object-contain scale-[0.98] pointer-events-none transition-transform duration-500 group-hover:scale-[1.02]"
                 />
               </div>
 
-              {/* Radial subtle ambient lighting over video */}
-              <div className="absolute inset-0 bg-slate-950/20 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,transparent_30%,#000_100%)] pointer-events-none" />
-
-              {/* Top Bar Overlay */}
+              {/* Top Bar: Official Badge & Board Affiliation (No duplicate ESTD) */}
               <div className="relative z-20 flex justify-between items-start">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/10 text-[10px] font-semibold text-slate-200 uppercase tracking-widest shadow-lg">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-[10px] font-semibold text-slate-200 uppercase tracking-widest shadow-lg">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Official Emblem
+                  Official Crest
                 </div>
-                <div className="px-2.5 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/10 text-[10px] font-mono font-medium text-slate-300">
-                  ESTD 1936
+                <div className="px-2.5 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/10 text-[10px] font-medium text-slate-300">
+                  WBBSE • WBCHSE
                 </div>
               </div>
 
-              {/* Bottom Cinematic Gradient Vignette (Guarantees bottom-left watermark is 100% hidden) */}
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent z-10 pointer-events-none" />
+              {/* Bottom Cinematic Gradient Vignette (Masks the extreme bottom-left corner watermark) */}
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent z-10 pointer-events-none" />
 
-              {/* Bottom Labeling */}
+              {/* Single Clean Establishment & Location Info */}
               <div className="relative z-20">
                 <p className="text-white font-heading text-xl font-bold tracking-tight">Est. {schoolInfo.established}</p>
                 <p className="text-slate-300 text-xs font-medium mt-0.5">{schoolInfo.managementType} • Kolkata</p>

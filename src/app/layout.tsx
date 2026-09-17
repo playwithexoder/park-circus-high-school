@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable} antialiased scroll-smooth`}>
+    <html lang="en" className={`${outfit.variable} ${inter.variable} antialiased`}>
       <body className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-blue-500 selection:text-white">
         {/* Animated Mesh Gradient Background */}
         <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-slate-50">

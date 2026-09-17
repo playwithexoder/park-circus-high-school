@@ -11,15 +11,19 @@ import Link from "next/link";
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const LOOP_START_TIME = 4.2;
+  const LOOP_START_TIME = 7.0;
 
   const handleTimeUpdate = () => {
+    if (videoRef.current && videoRef.current.currentTime >= 7.9) {
+      videoRef.current.currentTime = LOOP_START_TIME;
+      videoRef.current.play();
+    }
+  };
+
+  const handleEnded = () => {
     if (videoRef.current) {
-      // When reaching near the end (7.85s of 8s clip), loop only the settled ambient shimmer
-      if (videoRef.current.currentTime >= 7.85) {
-        videoRef.current.currentTime = LOOP_START_TIME;
-        videoRef.current.play();
-      }
+      videoRef.current.currentTime = LOOP_START_TIME;
+      videoRef.current.play();
     }
   };
 
@@ -100,6 +104,7 @@ export default function Home() {
                       muted
                       playsInline
                       onTimeUpdate={handleTimeUpdate}
+                      onEnded={handleEnded}
                       className="w-full h-full object-cover scale-[1.08] pointer-events-none"
                     />
                   </div>

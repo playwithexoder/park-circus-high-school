@@ -93,11 +93,8 @@ export default function Home() {
                 className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"
               />
 
-              {/* Video Framing - object-contain ensures full circular emblem with all text is unclipped */}
-              <div className="absolute inset-0 flex items-center justify-center p-3 overflow-hidden">
-                {/* Soft ambient backlight behind emblem */}
-                <div className="absolute w-52 h-52 bg-gradient-to-tr from-blue-600/25 to-amber-500/20 rounded-full blur-2xl pointer-events-none opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
-                
+              {/* Video Framing - object-cover centers the emblem and reflection, cropping excess 16:9 sides */}
+              <div className="absolute inset-0 overflow-hidden">
                 <video
                   ref={videoRef}
                   src="/assets/logo-animation.mp4"
@@ -106,7 +103,7 @@ export default function Home() {
                   playsInline
                   onTimeUpdate={handleTimeUpdate}
                   onEnded={handleEnded}
-                  className="w-full h-full object-contain scale-[0.98] pointer-events-none transition-transform duration-500 group-hover:scale-[1.02]"
+                  className="w-full h-full object-cover scale-[0.97] pointer-events-none"
                 />
               </div>
 

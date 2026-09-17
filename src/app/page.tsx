@@ -84,48 +84,43 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* EMBLEM SHOWCASE BLOCK - Spans 4 columns */}
-            <motion.div variants={itemVariants} className="md:col-span-4 rounded-3xl relative overflow-hidden min-h-[290px] md:min-h-[330px] flex flex-col items-center justify-center bg-slate-950 group border border-slate-800 shadow-2xl mt-6 md:mt-0 p-6">
-              {/* Moving Grid Background */}
-              <motion.div 
-                animate={{ backgroundPosition: ['0px 0px', '24px 24px'] }}
-                transition={{ duration: 1.5, ease: "linear", repeat: Infinity }}
-                className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"
-              />
-              {/* Gradient Mask to fade edges */}
-              <div className="absolute inset-0 bg-slate-950 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,transparent_20%,#000_100%)] pointer-events-none" />
-              
-              <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              
-              {/* Circular Emblem Frame with Watermark-Clipping Circular Mask & Ambient Glow */}
-              <div className="relative z-10 flex flex-col items-center">
-                <div className="relative">
-                  {/* Soft ambient backlight */}
-                  <div className="absolute -inset-2 bg-gradient-to-tr from-blue-600/30 to-amber-500/25 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-700" />
-                  
-                  {/* Precision Circular Mask - completely clips all 4 outer corners including bottom-left watermark */}
-                  <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl bg-black flex items-center justify-center ring-4 ring-white/5 transition-transform duration-500 group-hover:scale-105">
-                    <video
-                      ref={videoRef}
-                      src="/assets/logo-animation.mp4"
-                      autoPlay
-                      muted
-                      playsInline
-                      onTimeUpdate={handleTimeUpdate}
-                      onEnded={handleEnded}
-                      className="w-full h-full object-cover scale-[1.08] pointer-events-none"
-                    />
-                  </div>
-                </div>
+            {/* FULL BLEED EMBLEM SHOWCASE CARD - Spans 4 columns */}
+            <motion.div variants={itemVariants} className="md:col-span-4 rounded-3xl relative overflow-hidden min-h-[320px] md:min-h-[380px] flex flex-col justify-between bg-slate-950 group border border-slate-800/80 shadow-2xl mt-6 md:mt-0 p-6">
+              {/* Video Filling Entire Card Background with scale to eliminate corner watermark */}
+              <div className="absolute inset-0 overflow-hidden">
+                <video
+                  ref={videoRef}
+                  src="/assets/logo-animation.mp4"
+                  autoPlay
+                  muted
+                  playsInline
+                  onTimeUpdate={handleTimeUpdate}
+                  onEnded={handleEnded}
+                  className="w-full h-full object-cover scale-[1.14] pointer-events-none transition-transform duration-700 group-hover:scale-[1.18]"
+                />
+              </div>
 
-                <div className="mt-4 text-center z-10">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-[10px] font-semibold text-slate-300 uppercase tracking-widest mb-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Official Crest
-                  </div>
-                  <p className="text-white font-heading text-lg font-bold tracking-tight">Est. {schoolInfo.established}</p>
-                  <p className="text-slate-400 text-xs font-medium">Govt Sponsored • Kolkata</p>
+              {/* Radial subtle ambient lighting over video */}
+              <div className="absolute inset-0 bg-slate-950/20 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,transparent_30%,#000_100%)] pointer-events-none" />
+
+              {/* Top Bar Overlay */}
+              <div className="relative z-20 flex justify-between items-start">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/10 text-[10px] font-semibold text-slate-200 uppercase tracking-widest shadow-lg">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Official Emblem
                 </div>
+                <div className="px-2.5 py-1 rounded-full bg-slate-950/70 backdrop-blur-md border border-white/10 text-[10px] font-mono font-medium text-slate-300">
+                  ESTD 1936
+                </div>
+              </div>
+
+              {/* Bottom Cinematic Gradient Vignette (Guarantees bottom-left watermark is 100% hidden) */}
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent z-10 pointer-events-none" />
+
+              {/* Bottom Labeling */}
+              <div className="relative z-20">
+                <p className="text-white font-heading text-xl font-bold tracking-tight">Est. {schoolInfo.established}</p>
+                <p className="text-slate-300 text-xs font-medium mt-0.5">{schoolInfo.managementType} • Kolkata</p>
               </div>
             </motion.div>
 

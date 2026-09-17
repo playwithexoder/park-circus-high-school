@@ -1,41 +1,17 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { schoolInfo } from "@/lib/data/school-info";
 import { ArrowRight, BookOpen, GraduationCap, Users, Trophy, ChalkboardTeacher, Books, Certificate, Star, Laptop } from "@phosphor-icons/react/dist/ssr";
-import { Play, Pause, RotateCcw } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-  const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const LOOP_START_TIME = 4.2;
-
-  const togglePlay = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        videoRef.current.play();
-        setIsPlaying(true);
-      }
-    }
-  };
-
-  const replayIntro = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
 
   const handleTimeUpdate = () => {
     if (videoRef.current) {
@@ -126,27 +102,6 @@ export default function Home() {
                       onTimeUpdate={handleTimeUpdate}
                       className="w-full h-full object-cover scale-[1.08] pointer-events-none"
                     />
-                  </div>
-
-                  {/* Dual Micro-Controls Dock (appears smoothly on hover) */}
-                  <div className="absolute bottom-1 right-1 z-20 flex items-center gap-1 bg-slate-900/90 backdrop-blur-md px-2 py-1 rounded-full border border-white/20 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <button 
-                      onClick={replayIntro}
-                      title="Replay Full Reveal"
-                      aria-label="Replay Full Reveal"
-                      className="p-1 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-                    >
-                      <RotateCcw size={12} />
-                    </button>
-                    <div className="w-[1px] h-3 bg-white/20" />
-                    <button 
-                      onClick={togglePlay}
-                      title={isPlaying ? "Pause" : "Play"}
-                      aria-label={isPlaying ? "Pause" : "Play"}
-                      className="p-1 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-                    >
-                      {isPlaying ? <Pause size={12} /> : <Play size={12} />}
-                    </button>
                   </div>
                 </div>
 
